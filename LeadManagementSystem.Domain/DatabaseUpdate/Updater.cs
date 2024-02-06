@@ -1,5 +1,6 @@
 ﻿using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Updating;
+using LeadManagementSystem.Domain.ApplicationUsers;
 
 namespace LeadManagementSystem.Domain.DatabaseUpdate;
 
@@ -10,16 +11,17 @@ public class Updater : ModuleUpdater {
     }
     public override void UpdateDatabaseAfterUpdateSchema() {
         base.UpdateDatabaseAfterUpdateSchema();
-        //string name = "MyName";
-        //EntityObject1 theObject = ObjectSpace.FirstOrDefault<EntityObject1>(u => u.Name == name);
-        //if(theObject == null) {
-        //    theObject = ObjectSpace.CreateObject<EntityObject1>();
-        //    theObject.Name = name;
-        //}
+        
+        var adminUser = CreateUser.Admin(ObjectSpace);
+        var adminRole = CreateRole.SysAdmin(ObjectSpace);
+        adminUser.Roles.Add(adminRole);
 
-		//ObjectSpace.CommitChanges(); //Uncomment this line to persist created object(s).
-    }
-    public override void UpdateDatabaseBeforeUpdateSchema() {
-        base.UpdateDatabaseBeforeUpdateSchema();
+        var appAdmin = CreateUser.AppAdmin(ObjectSpace);
+        var appAdminRole = CreateRole.AppAdmin(ObjectSpace);
+        appAdmin.Roles.Add(appAdminRole);
+        
+        _ = CreateRole.Agent(ObjectSpace);
+
+        ObjectSpace.CommitChanges();
     }
 }
