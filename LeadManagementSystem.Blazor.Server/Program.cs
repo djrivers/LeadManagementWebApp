@@ -3,6 +3,8 @@ using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Blazor.DesignTime;
 using DevExpress.ExpressApp.Design;
 using DevExpress.ExpressApp.Utils;
+using LeadManagementSystem.Module.BusinessObjects;
+using Microsoft.EntityFrameworkCore;
 
 namespace LeadManagementSystem.Blazor.Server;
 
@@ -33,6 +35,16 @@ public class Program : IDesignTimeApplicationFactory {
                 }
             }
             else {
+                // Run only if debug mode is enabled.
+                if (host.Services.GetRequiredService<IWebHostEnvironment>().IsDevelopment())
+                {
+                    using var scope = host.Services.CreateScope();
+
+                    var db = scope.ServiceProvider.GetRequiredService<LeadManagementSystemEFCoreDbContext>();
+                    db.Database.EnsureDeleted();
+                    db.Database.Migrate();
+                }
+                
                 host.Run();
             }
         }
