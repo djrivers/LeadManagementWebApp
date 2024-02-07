@@ -35,7 +35,7 @@ public class Program : IDesignTimeApplicationFactory {
                 }
             }
             else {
-                // Run only if debug mode is enabled.
+                // In development mode, the database is created and migrated automatically.
                 if (host.Services.GetRequiredService<IWebHostEnvironment>().IsDevelopment())
                 {
                     using var scope = host.Services.CreateScope();
