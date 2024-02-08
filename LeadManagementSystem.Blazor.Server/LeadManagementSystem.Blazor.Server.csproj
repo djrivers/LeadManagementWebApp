@@ -33,11 +33,8 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LeadManagementSystem.Application\LeadManagementSystem.Application.csproj" />
-    <ProjectReference Include="..\LeadManagementSystem.Domain\LeadManagementSystem.Domain.csproj" />
-    <ProjectReference Include="..\LeadManagementSystem.Infrastructure\LeadManagementSystem.Infrastructure.csproj" />
     <ProjectReference Include="..\LeadManagementSystem.Module\LeadManagementSystem.Module.csproj" />
-    <ProjectReference Include="..\LeadManagementSystem.Persistence\LeadManagementSystem.Persistence.csproj" />
-    <ProjectReference Include="..\LeadManagementSystem.UIControllers.BlazorServer\LeadManagementSystem.UIControllers.BlazorServer.csproj" />
+    <ProjectReference Include="..\LeadManagementSystem.UserManagement.Infrastructure\LeadManagementSystem.UserManagement.Infrastructure.csproj" />
+    <ProjectReference Include="..\LeadManagementSystem.UserManagementModule\LeadManagementSystem.UserManagementModule.csproj" />
   </ItemGroup>
 </Project>

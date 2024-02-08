@@ -2,15 +2,14 @@
 using DevExpress.ExpressApp.ApplicationBuilder;
 using DevExpress.ExpressApp.Blazor.ApplicationBuilder;
 using DevExpress.ExpressApp.Blazor.Services;
+using DevExpress.Persistent.Base;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Components.Server.Circuits;
 using Microsoft.EntityFrameworkCore;
 using LeadManagementSystem.Blazor.Server.Services;
 using DevExpress.Persistent.BaseImpl.EF.PermissionPolicy;
-using LeadManagementSystem.Application;
-using LeadManagementSystem.Domain;
-using LeadManagementSystem.Infrastructure;
-using LeadManagementSystem.Module.BusinessObjects;
+using LeadManagementSystem.UserManagement.Domain;
+using LeadManagementSystem.UserManagement.Infrastructure;
 
 namespace LeadManagementSystem.Blazor.Server;
 
@@ -34,11 +33,6 @@ public class Startup {
             builder.UseApplication<LeadManagementSystemBlazorApplication>();
             builder.Modules
                 .AddAuditTrailEFCore()
-                .Add<DomainModule>()
-                .Add<UIControllers.BlazorServer.BlazorServerModule>()
-                .Add<PersistenceModule>()
-                .Add<InfrastructureModule>()
-                .Add<ApplicationModule>()
                 .AddConditionalAppearance()
                 .AddDashboards(options => {
                     options.DashboardDataType = typeof(DevExpress.Persistent.BaseImpl.EF.DashboardData);
@@ -58,8 +52,9 @@ public class Startup {
                     options.AllowValidationDetailsAccess = false;
                 })
                 .AddViewVariants()
-                .Add<Module.LeadManagementSystemModule>()
+                .Add<LeadManagementSystem.Module.LeadManagementSystemModule>()
             	.Add<LeadManagementSystemBlazorModule>();
+            UserManagementModule.UserManagementModule.Setup(builder.ObjectSpaceProviders, builder.Modules, Configuration);
             builder.ObjectSpaceProviders
                 .AddSecuredEFCore(options => options.PreFetchReferenceProperties())
                     .WithAuditedDbContext(contexts => {
@@ -79,8 +74,7 @@ public class Startup {
                                 }
 #endif
                                 ArgumentNullException.ThrowIfNull(connectionString);
-                                businessObjectDbContextOptions.UseSqlServer(connectionString, option => 
-                                    option.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
+                                businessObjectDbContextOptions.UseSqlServer(connectionString);
                                 businessObjectDbContextOptions.UseChangeTrackingProxies();
                                 businessObjectDbContextOptions.UseObjectSpaceLinkProxies();
                                 businessObjectDbContextOptions.UseLazyLoadingProxies();

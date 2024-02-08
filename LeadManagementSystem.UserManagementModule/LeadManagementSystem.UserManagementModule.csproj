@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="DevExpress.ExpressApp" Version="23.2.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\LeadManagementSystem.UserManagement.Application\LeadManagementSystem.UserManagement.Application.csproj" />
+      <ProjectReference Include="..\LeadManagementSystem.UserManagement.Domain\LeadManagementSystem.UserManagement.Domain.csproj" />
+      <ProjectReference Include="..\LeadManagementSystem.UserManagement.Infrastructure\LeadManagementSystem.UserManagement.Infrastructure.csproj" />
+      <ProjectReference Include="..\LeadManagementSystem.UserManagement.UI\LeadManagementSystem.UserManagement.UI.csproj" />
+    </ItemGroup>
+
+</Project>

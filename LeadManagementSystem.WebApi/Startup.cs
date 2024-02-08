@@ -1,4 +1,6 @@
 ﻿using DevExpress.ExpressApp.Security;
+using DevExpress.Persistent.Base;
+using DevExpress.Persistent.BaseImpl.EFCore.AuditTrail;
 using Microsoft.EntityFrameworkCore;
 using DevExpress.Persistent.BaseImpl.EF.PermissionPolicy;
 using System.Text;
@@ -12,7 +14,8 @@ using LeadManagementSystem.WebApi.JWT;
 using DevExpress.ExpressApp.Security.Authentication.ClientServer;
 using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.ApplicationBuilder;
-using LeadManagementSystem.Module.BusinessObjects;
+using LeadManagementSystem.UserManagement.Domain;
+using LeadManagementSystem.UserManagement.Infrastructure;
 
 namespace LeadManagementSystem.WebApi;
 
@@ -39,7 +42,7 @@ public class Startup {
                     options.ReportDataType = typeof(DevExpress.Persistent.BaseImpl.EF.ReportDataV2);
                 })
                 .AddValidation()
-                .Add<Module.LeadManagementSystemModule>();
+                .Add<LeadManagementSystem.Module.LeadManagementSystemModule>();
 
 
             builder.ObjectSpaceProviders
@@ -96,7 +99,7 @@ public class Startup {
 
             builder.AddBuildStep(application => {
                 application.ApplicationName = "SetupApplication.LeadManagementSystem";
-                application.CheckCompatibilityType = CheckCompatibilityType.DatabaseSchema;
+                application.CheckCompatibilityType = DevExpress.ExpressApp.CheckCompatibilityType.DatabaseSchema;
 #if DEBUG
                 if(System.Diagnostics.Debugger.IsAttached && application.CheckCompatibilityType == CheckCompatibilityType.DatabaseSchema) {
                     application.DatabaseUpdateMode = DatabaseUpdateMode.UpdateDatabaseAlways;
@@ -157,7 +160,7 @@ public class Startup {
                     {
                         new OpenApiSecurityScheme() {
                             Reference = new OpenApiReference() {
-                                Type = ReferenceType.SecurityScheme,
+                                Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
                                 Id = "JWT"
                             }
                         },

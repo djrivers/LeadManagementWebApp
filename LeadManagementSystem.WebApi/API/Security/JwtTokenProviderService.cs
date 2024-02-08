@@ -1,5 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Runtime.ExceptionServices;
+using System.Security.Claims;
 using System.Text;
 using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Security;

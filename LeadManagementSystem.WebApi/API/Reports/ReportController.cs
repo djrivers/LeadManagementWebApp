@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using DevExpress.ExpressApp.ReportsV2.Services;
 using DevExpress.ExpressApp.ReportsV2;
 using DevExpress.Persistent.BaseImpl.EF;
 using DevExpress.Xpo;

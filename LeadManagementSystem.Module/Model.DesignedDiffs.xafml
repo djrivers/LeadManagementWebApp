@@ -135,5 +135,23 @@
         </LayoutGroup>
       </Layout>
     </DetailView>
+    <ListView Id="KpiDefinition_ListView">
+      <Columns>
+        <ColumnInfo Id="CompareBase" Width="37" />
+        <ColumnInfo Id="Name" Width="297" SortOrder="Descending" />
+        <ColumnInfo Id="Active" Index="1" Width="80" />
+        <ColumnInfo Id="Criteria" Width="48" />
+        <ColumnInfo Id="TargetObjectType" Index="2" Width="48" />
+        <ColumnInfo Id="Expression" Width="48" />
+        <ColumnInfo Id="GreenZone" Index="3" Width="34" />
+        <ColumnInfo Id="RedZone" Index="4" Width="34" />
+        <ColumnInfo Id="Range" Index="5" Width="48" />
+        <ColumnInfo Id="Compare" Index="6" Width="34" />
+        <ColumnInfo Id="RangeToCompare" Index="7" Width="48" />
+        <ColumnInfo Id="MeasurementFrequency" Index="8" Width="48" />
+        <ColumnInfo Id="Direction" Index="9" Width="48" />
+        <ColumnInfo Id="Period" Index="10" Width="48" />
+      </Columns>
+    </ListView>
   </Views>
 </Application>

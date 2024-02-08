@@ -1,12 +1,19 @@
 ﻿using DevExpress.ExpressApp;
+using DevExpress.ExpressApp.ApplicationBuilder;
 using DevExpress.ExpressApp.Blazor;
+using DevExpress.ExpressApp.Security;
+using DevExpress.ExpressApp.Security.ClientServer;
+using DevExpress.ExpressApp.SystemModule;
+using Microsoft.EntityFrameworkCore;
+using DevExpress.ExpressApp.EFCore;
+using DevExpress.EntityFrameworkCore.Security;
 
 namespace LeadManagementSystem.Blazor.Server;
 
 public class LeadManagementSystemBlazorApplication : BlazorApplication {
     public LeadManagementSystemBlazorApplication() {
         ApplicationName = "LeadManagementSystem";
-        CheckCompatibilityType = CheckCompatibilityType.DatabaseSchema;
+        CheckCompatibilityType = DevExpress.ExpressApp.CheckCompatibilityType.DatabaseSchema;
         DatabaseVersionMismatch += LeadManagementSystemBlazorApplication_DatabaseVersionMismatch;
     }
     protected override void OnSetupStarted() {
